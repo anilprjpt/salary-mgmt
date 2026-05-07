@@ -33,7 +33,8 @@ const validateEmployee = (data) => {
   ]);
 
   // Additional checks
-  if (typeof data.salary !== "number" || data.salary < 0) {
+  const { salary } = data;
+  if (typeof salary !== "number" || salary <= 0) {
     throw new Error("Salary must be a positive number");
   }
 };
