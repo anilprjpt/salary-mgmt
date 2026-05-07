@@ -81,4 +81,44 @@ describe("Employee API - CRUD", () => {
         expect(res.body[0]).toHaveProperty("salary");
     });
 
+    // READ BY ID
+    it("should get employee by id", async () => {
+        const createRes = await request(app)
+            .post("/employees")
+            .send({
+                fullName: "Anil Prajapati",
+                jobTitle: "Software Engineer",
+                country: "India",
+                salary: 50000
+            });
+        const employeeId = createRes.body.id;
+
+        const res = await request(app)
+            .get(`/employees/${employeeId}`);
+
+        expect(res.statusCode).toBe(200);
+
+        expect(res.body).toHaveProperty("id", employeeId);
+
+        expect(res.body).toHaveProperty(
+            "fullName",
+            "Anil Prajapati"
+        );
+
+        expect(res.body).toHaveProperty(
+            "jobTitle",
+            "Software Engineer"
+        );
+
+        expect(res.body).toHaveProperty(
+            "country",
+            "India"
+        );
+
+        expect(res.body).toHaveProperty(
+            "salary",
+            50000
+        );
+    });
+
 });
