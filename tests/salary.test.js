@@ -48,4 +48,28 @@ describe("Salary API", () => {
         );
     });
 
+    it("should calculate salary for US using custom gross", async () => {
+        const createRes = await request(app)
+            .post("/employees")
+            .send({
+                fullName: "Emp US",
+                jobTitle: "Developer",
+                country: "United States",
+                salary: 2000
+            });
+
+        const employeeId = createRes.body.id;
+
+        const res = await request(app)
+            .get(`/salary/${employeeId}?gross=2000`);
+
+        expect(res.statusCode).toBe(200);
+
+        expect(res.body).toEqual({
+            gross: 2000,
+            deduction: 240,
+            net: 1760
+        });
+    });
+
 });
