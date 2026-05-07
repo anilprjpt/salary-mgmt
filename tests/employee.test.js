@@ -177,4 +177,26 @@ describe("Employee API - CRUD", () => {
         );
     });
 
+    it("should delete employee", async () => {
+        const createRes = await request(app)
+            .post("/employees")
+            .send({
+                fullName: "Anil Prajapati",
+                jobTitle: "Developer",
+                country: "India",
+                salary: 50000
+            });
+        const employeeId = createRes.body.id;
+
+        const deleteRes = await request(app)
+            .delete(`/employees/${employeeId}`);
+        
+        expect(deleteRes.statusCode).toBe(204);
+
+        const getRes = await request(app)
+            .get(`/employees/${employeeId}`);
+
+        expect(getRes.statusCode).toBe(404);
+    });
+
 });
