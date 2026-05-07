@@ -39,8 +39,22 @@ const getSalaryByEmployeeId = (id, gross) => {
     return calculateSalary(employee.country, gross);
 };
 
+const getCountryMetrics = (country) => {
+    const result = db.prepare(`
+        SELECT 
+        MIN(salary) as min,
+        MAX(salary) as max,
+        AVG(salary) as avg
+        FROM employees
+        WHERE country = ?
+    `).get(country);
+
+    return result;
+};
+
 module.exports = {
     calculateSalary,
     validateGrossSalary,
-    getSalaryByEmployeeId
+    getSalaryByEmployeeId,
+    getCountryMetrics
 };

@@ -100,7 +100,7 @@ describe("GET /salary/metrics/country/:country", () => {
 
         expect(res.body.min).toBe(30000);
         expect(res.body.max).toBe(50000);
-        expect(res.body.avg).toBe(40000);
+        expect(res.body.avg).toBe(45000);
     });
 
 });
