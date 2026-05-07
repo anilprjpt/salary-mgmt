@@ -71,5 +71,36 @@ describe("Salary API", () => {
             net: 1760
         });
     });
+});
+
+describe("GET /salary/metrics/country/:country", () => {
+    it("should return salary metrics for India", async () => {
+        await request(app)
+            .post("/employees")
+            .send({
+                fullName: "Emp 1",
+                jobTitle: "Developer",
+                country: "India",
+                salary: 30000
+            });
+
+        await request(app)
+            .post("/employees")
+            .send({
+                fullName: "Emp 2",
+                jobTitle: "Manager",
+                country: "India",
+                salary: 50000
+            });
+
+        const res = await request(app)
+            .get("/salary/metrics/country/India");
+
+        expect(res.statusCode).toBe(200);
+
+        expect(res.body.min).toBe(30000);
+        expect(res.body.max).toBe(50000);
+        expect(res.body.avg).toBe(40000);
+    });
 
 });
