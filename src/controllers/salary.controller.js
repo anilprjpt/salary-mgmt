@@ -21,10 +21,8 @@ exports.getCountryMetrics = (req, res, next) => {
 
 exports.getJobMetrics = (req, res, next) => {
   try {
-    const result =
-      salaryService.getJobTitleAvg(
-        req.params.jobTitle
-      );
+    const { jobTitle } = req.params;
+    const result = salaryService.getJobTitleAvg(jobTitle);
     res.status(200).json(result);
   } catch (err) {
     next(err);

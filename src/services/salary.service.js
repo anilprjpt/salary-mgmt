@@ -61,13 +61,15 @@ const getCountryMetrics = (country) => {
 };
 
 const getJobTitleAvg = (jobTitle) => {
-    const result = db.prepare(`
-        SELECT AVG(salary) as avg
+    const query = `
+        SELECT 
+            AVG(salary) as avg
         FROM employees
         WHERE jobTitle = ?
-    `).get(jobTitle);
+    `;
+    const avgSalary = db.prepare(query).get(jobTitle);
 
-    return result;  
+    return avgSalary;  
 };
 
 module.exports = {
