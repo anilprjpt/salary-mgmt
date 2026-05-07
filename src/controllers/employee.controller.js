@@ -1,6 +1,6 @@
 const service = require("../services/employee.service");
 
-exports.createEmployee = async (req, res, next) => {
+const createEmployee = async (req, res, next) => {
   try {
     const data = await service.createEmployee(req.body);
     res.status(201).json(data);
@@ -9,7 +9,7 @@ exports.createEmployee = async (req, res, next) => {
   }
 };
 
-exports.getEmployees = (req, res, next) => {
+const getEmployees = (req, res, next) => {
   try {
     res.json(service.getAllEmployees());
   } catch (err) {
@@ -17,10 +17,16 @@ exports.getEmployees = (req, res, next) => {
   }
 };
 
-exports.getEmployee = (req, res, next) => {
+const getEmployee = (req, res, next) => {
   try {
     res.json(service.getEmployeeById(req.params.id));
   } catch (err) {
     next(err);
   }
+};
+
+module.exports = {
+  createEmployee,
+  getEmployees,
+  getEmployee
 };
