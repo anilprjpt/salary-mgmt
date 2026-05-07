@@ -40,23 +40,24 @@ const getSalaryByEmployeeId = (id, gross) => {
 };
 
 const getCountryMetrics = (country) => {
-    const result = db.prepare(`
+    const query = `
         SELECT 
-        MIN(salary) as min,
-        MAX(salary) as max,
-        AVG(salary) as avg
+            MIN(salary) as min,
+            MAX(salary) as max,
+            AVG(salary) as avg
         FROM employees
         WHERE country = ?
-    `).get(country);
-    
-    if (result.min === null) {
+    `;
+    const metrics = db.prepare(query).get(country);
+
+    if (!metrics.min) {
         throw {
             status: 404,
             message: `No employees found for country: ${country}`
         };
     }
 
-    return result;
+    return metrics;
 };
 
 module.exports = {
