@@ -23,6 +23,15 @@ const getEmployeeById = (id) => {
 };
 
 const updateEmployee = (id, data) => {
+  validateEmployee(data);
+  const existingEmployee = repo.findById(id);
+  if (!existingEmployee) {
+    const error = new Error("Employee not found");
+    error.status = 404;
+    error.type = "NOT_FOUND";
+    throw error;
+  }
+
   return repo.update(id, data);
 };
 
