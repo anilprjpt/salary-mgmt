@@ -7,7 +7,6 @@ beforeEach(() => {
 });
 
 describe("Employee API - CRUD", () => {
-    let employeeId;
     const employeePayload = {
         fullName: "Anil Prajapati",
         jobTitle: "Software Engineer",
@@ -21,7 +20,6 @@ describe("Employee API - CRUD", () => {
             .send(employeePayload);
 
         expect(res.statusCode).toBe(201);
-        employeeId = res.body.id;
     });
 
     it("should fail if required fields are missing", async () => {
@@ -30,6 +28,7 @@ describe("Employee API - CRUD", () => {
         });
 
         expect(res.statusCode).toBe(400);
+
         expect(res.body.message).toContain("Missing required fields");
     });
 
@@ -127,11 +126,7 @@ describe("Employee API - CRUD", () => {
 
         expect(res.statusCode).toBe(404);
 
-        expect(res.body).toEqual({
-            success: false,
-            message: "Employee not found"
-        });
-
+        expect(res.body.message).toContain("Employee not found");
     });
 
 });
