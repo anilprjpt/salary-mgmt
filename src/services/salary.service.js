@@ -26,7 +26,7 @@ const validateGrossSalary = (gross) => {
     }
 };
 
-exports.getSalaryByEmployeeId = (id, gross) => {  
+const getSalaryByEmployeeId = (id, gross) => {  
     validateGrossSalary(gross);  
     const employee = employeeRepo.findById(id);
     if (!employee) {
@@ -37,4 +37,10 @@ exports.getSalaryByEmployeeId = (id, gross) => {
     }
 
     return calculateSalary(employee.country, gross);
+};
+
+module.exports = {
+    calculateSalary,
+    validateGrossSalary,
+    getSalaryByEmployeeId
 };
