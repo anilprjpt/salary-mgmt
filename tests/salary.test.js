@@ -103,4 +103,12 @@ describe("GET /salary/metrics/country/:country", () => {
         expect(res.body.avg).toBe(45000);
     });
 
+    it("should return 404 when no employees exist for country", async () => {
+        const res = await request(app)
+            .get("/salary/metrics/country/Japan");
+
+        expect(res.statusCode).toBe(404);
+        expect(res.body.message).toBe("No employees found for country: Japan");
+    });
+
 });
