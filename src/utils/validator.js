@@ -31,6 +31,11 @@ const validateEmployee = (data) => {
     "country",
     "salary"
   ]);
+
+  // Additional checks
+  if (typeof data.salary !== "number" || data.salary < 0) {
+    throw new Error("Salary must be a positive number");
+  }
 };
 
 module.exports = {
