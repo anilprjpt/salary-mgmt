@@ -6,6 +6,8 @@ const calculateSalary = (country,grossSalary) => {
 
     if (country === "India") {
         deduction = grossSalary * 0.1;
+    } else if (country === "United States") {
+        deduction = grossSalary * 0.12;
     }
 
     return {
