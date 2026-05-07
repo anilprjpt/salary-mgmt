@@ -39,4 +39,15 @@ describe("Employee API - CRUD", () => {
         expect(res.statusCode).toBe(400);
     });
 
+    it("should fail if fullName is too short", async () => {
+        const res = await request(app).post("/employees").send({
+            fullName: "A",
+            jobTitle: "Dev",
+            country: "India",
+            salary: 1000,
+        });
+
+        expect(res.statusCode).toBe(400);
+    });
+
 });
