@@ -110,5 +110,36 @@ describe("GET /salary/metrics/country/:country", () => {
         expect(res.statusCode).toBe(404);
         expect(res.body.message).toBe("No employees found for country: Japan");
     });
+});
+
+describe("GET /salary/metrics/job/:jobTitle", () => {
+    it("should return average salary for a job title", async () => {
+        await request(app)
+            .post("/employees")
+            .send({
+                fullName: "John Doe",
+                jobTitle: "Developer",
+                country: "India",
+                salary: 50000
+            });
+
+        await request(app)
+            .post("/employees")
+            .send({
+                fullName: "Jane Smith",
+                jobTitle: "Developer",
+                country: "USA",
+                salary: 70000
+            });
+
+        const res = await request(app)
+            .get("/salary/metrics/job/Developer");
+
+        expect(res.statusCode).toBe(200);
+        expect(res.body).toEqual({
+            avg: 42000
+        });
+    });
+    
 
 });
