@@ -1,8 +1,8 @@
 const service = require("../services/employee.service");
 
-exports.createEmployee = (req, res, next) => {
+exports.createEmployee = async (req, res, next) => {
   try {
-    const data = service.createEmployee(req.body);
+    const data = await service.createEmployee(req.body);
     res.status(201).json(data);
   } catch (err) {
     next(err);

@@ -1,10 +1,12 @@
 const db = require("../config/database");
 
-exports.create = (employee) => {
-  const stmt = db.prepare(`
-    INSERT INTO employees (fullName, jobTitle, country, salary)
-    VALUES (?, ?, ?, ?)
-  `);
+const INSERT_EMPLOYEE_QUERY = `
+  INSERT INTO employees (fullName, jobTitle, country, salary)
+  VALUES (?, ?, ?, ?)
+`;
+
+exports.create = async (employee) => {
+  const stmt = db.prepare(INSERT_EMPLOYEE_QUERY);
 
   const result = stmt.run(
     employee.fullName,
@@ -13,5 +15,9 @@ exports.create = (employee) => {
     employee.salary
   );
 
-  return { id: result.lastInsertRowid, ...employee };
+  return {
+    id: result.lastInsertRowid,
+    ...employee,
+  };
 };
+

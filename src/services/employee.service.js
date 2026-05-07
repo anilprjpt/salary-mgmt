@@ -1,5 +1,5 @@
 const repo = require("../repositories/employee.repository");
 
-exports.createEmployee = (data) => {
-  return repo.create(data);
+exports.createEmployee = async (data) => {
+  return await repo.create(data);
 };
