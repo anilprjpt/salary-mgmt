@@ -10,7 +10,20 @@ const getAllEmployees = () => {
   return repo.findAll();
 };
 
+const getEmployeeById = (id) => {
+  const employee = repo.findById(id);
+  if (!employee) {
+    throw {
+      status: 404,
+      message: "Employee not found"
+    };
+  }
+  
+  return employee;
+};
+
 module.exports = {
   createEmployee,
-  getAllEmployees
+  getAllEmployees,
+  getEmployeeById
 };

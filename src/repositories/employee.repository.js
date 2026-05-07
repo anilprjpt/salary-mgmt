@@ -24,3 +24,7 @@ exports.create = async (employee) => {
 exports.findAll = () => {
   return db.prepare("SELECT * FROM employees").all();
 };
+
+exports.findById = (id) => {
+  return db.prepare("SELECT * FROM employees WHERE id=?").get(id);
+};
