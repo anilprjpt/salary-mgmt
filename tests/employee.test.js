@@ -121,4 +121,17 @@ describe("Employee API - CRUD", () => {
         );
     });
 
+    it("should return 404 for non-existent employee", async () => {
+        const res = await request(app)
+            .get("/employees/99999");
+
+        expect(res.statusCode).toBe(404);
+
+        expect(res.body).toEqual({
+            success: false,
+            message: "Employee not found"
+        });
+
+    });
+
 });
