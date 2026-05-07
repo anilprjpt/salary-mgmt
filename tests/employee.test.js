@@ -1,5 +1,10 @@
 const request = require("supertest");
 const app = require("../src/app");
+const db = require("../src/config/database");
+
+beforeEach(() => {
+  db.prepare("DELETE FROM employees").run();
+});
 
 describe("Employee API - CRUD", () => {
     let employeeId;
