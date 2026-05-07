@@ -6,6 +6,11 @@ const createEmployee = async (data) => {
   return await repo.create(data);
 };
 
+const getAllEmployees = () => {
+  return repo.findAll();
+};
+
 module.exports = {
-  createEmployee
+  createEmployee,
+  getAllEmployees
 };

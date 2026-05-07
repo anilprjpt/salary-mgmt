@@ -21,3 +21,6 @@ exports.create = async (employee) => {
   };
 };
 
+exports.findAll = () => {
+  return db.prepare("SELECT * FROM employees").all();
+};

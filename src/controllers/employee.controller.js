@@ -8,3 +8,11 @@ exports.createEmployee = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.getEmployees = (req, res, next) => {
+  try {
+    res.json(service.getAllEmployees());
+  } catch (err) {
+    next(err);
+  }
+};
