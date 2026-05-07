@@ -14,4 +14,14 @@ describe("POST /employees", () => {
 
         expect(res.statusCode).toBe(201);
     });
+
+    it("should fail if required fields are missing", async () => {
+        const res = await request(app).post("/employees").send({
+            fullName: "Anil",
+        });
+
+        expect(res.statusCode).toBe(400);
+        expect(res.body.message).toContain("Missing required fields");
+    });
+
 });
