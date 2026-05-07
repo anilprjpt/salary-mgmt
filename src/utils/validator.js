@@ -1,21 +1,25 @@
-// Generic validation helper
-const validateRequiredFields = (data, fields) => {
-  const missingFields = [];
-
-  fields.forEach((field) => {
-    if (
+const getMissingFields = (data, fields) => {
+  return fields.filter(
+    (field) =>
       data[field] === undefined ||
       data[field] === null ||
       data[field] === ""
-    ) {
-      missingFields.push(field);
-    }
-  });
+  );
+};
+
+// Generic validation helper
+const validateRequiredFields = (data, fields) => {
+  const missingFields = getMissingFields(data, fields);
 
   if (missingFields.length > 0) {
-    throw new Error(
+    const error = new Error(
       `Missing required fields: ${missingFields.join(", ")}`
     );
+
+    error.type = "VALIDATION_ERROR";
+    error.fields = missingFields;
+
+    throw error;
   }
 };
 
@@ -30,5 +34,7 @@ const validateEmployee = (data) => {
 };
 
 module.exports = {
+  getMissingFields,
+  validateRequiredFields,
   validateEmployee
 };
