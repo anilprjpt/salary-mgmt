@@ -68,6 +68,12 @@ const getJobTitleAvg = (jobTitle) => {
         WHERE jobTitle = ?
     `;
     const avgSalary = db.prepare(query).get(jobTitle);
+    if (avgSalary.avg === null) {
+        throw {
+            status: 404,
+            message: `No employees found for job title: ${jobTitle}`
+        };
+    }
 
     return avgSalary;  
 };
