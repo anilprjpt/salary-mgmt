@@ -75,7 +75,9 @@ const getJobTitleAvg = (jobTitle) => {
         };
     }
 
-    return avgSalary;  
+    return {
+        avg: avgSalary.avg
+    };
 };
 
 module.exports = {

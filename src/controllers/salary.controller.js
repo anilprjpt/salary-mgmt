@@ -1,5 +1,5 @@
 const salaryService = require("../services/salary.service");
-exports.getSalary = (req, res, next) => {
+const getSalary = (req, res, next) => {
   try {
     const gross = Number(req.query.gross);
     const { id } = req.params;
@@ -10,7 +10,7 @@ exports.getSalary = (req, res, next) => {
   }
 };
 
-exports.getCountryMetrics = (req, res, next) => {
+const getCountryMetrics = (req, res, next) => {
   try {
     const { country } = req.params;
     res.json(salaryService.getCountryMetrics(country));
@@ -19,7 +19,7 @@ exports.getCountryMetrics = (req, res, next) => {
   }
 };
 
-exports.getJobMetrics = (req, res, next) => {
+const getJobMetrics = (req, res, next) => {
   try {
     const { jobTitle } = req.params;
     const result = salaryService.getJobTitleAvg(jobTitle);
@@ -27,4 +27,10 @@ exports.getJobMetrics = (req, res, next) => {
   } catch (err) {
     next(err);
   }
+};
+
+module.exports = {
+    getSalary,
+    getCountryMetrics,
+    getJobMetrics
 };
