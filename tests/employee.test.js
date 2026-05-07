@@ -50,4 +50,30 @@ describe("Employee API - CRUD", () => {
         expect(res.statusCode).toBe(400);
     });
 
+    // READ ALL
+    it("should get all employees", async () => {
+        await request(app)
+            .post("/employees")
+            .send({
+                fullName: "Anil Prajapati",
+                jobTitle: "Software Engineer",
+                country: "India",
+                salary: 50000
+            });
+
+        const res = await request(app).get("/employees");
+        
+        expect(res.statusCode).toBe(200);
+
+        expect(Array.isArray(res.body)).toBe(true);
+
+        expect(res.body.length).toBeGreaterThan(0);
+
+        expect(res.body[0]).toHaveProperty("id");
+        expect(res.body[0]).toHaveProperty("fullName");
+        expect(res.body[0]).toHaveProperty("jobTitle");
+        expect(res.body[0]).toHaveProperty("country");
+        expect(res.body[0]).toHaveProperty("salary");
+    });
+
 });
