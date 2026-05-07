@@ -39,6 +39,6 @@ exports.update = (id, data) => {
   return exports.findById(id);
 };
 
-exports.delete = (id) => {
+exports.deleteEmployee = (id) => {
   return db.prepare("DELETE FROM employees WHERE id=?").run(id);
 };

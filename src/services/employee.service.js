@@ -36,7 +36,7 @@ const updateEmployee = (id, data) => {
 };
 
 const deleteEmployee = (id) => {
-  return repo.delete(id);
+  return repo.deleteEmployee(id);
 };
 
 module.exports = {
