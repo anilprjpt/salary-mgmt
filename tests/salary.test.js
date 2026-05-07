@@ -140,6 +140,17 @@ describe("GET /salary/metrics/job/:jobTitle", () => {
             avg: 42000
         });
     });
+
+    it("should return 404 when no employees found for job title", async () => {
+        const res = await request(app)
+            .get("/salary/metrics/job/Tester");
+
+        expect(res.statusCode).toBe(404);
+        expect(res.body).toEqual({
+            success: false,
+            message: "No employees found for job title: Tester"
+        });
+    });
     
 
 });
