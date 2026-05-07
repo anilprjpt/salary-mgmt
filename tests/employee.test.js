@@ -28,4 +28,15 @@ describe("Employee API - CRUD", () => {
         expect(res.body.message).toContain("Missing required fields");
     });
 
+    it("should fail if salary is negative", async () => {
+        const res = await request(app).post("/employees").send({
+            fullName: "Anil",
+            jobTitle: "Dev",
+            country: "India",
+            salary: -100,
+        });
+
+        expect(res.statusCode).toBe(400);
+    });
+
 });
