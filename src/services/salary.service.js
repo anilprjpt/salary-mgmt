@@ -48,6 +48,13 @@ const getCountryMetrics = (country) => {
         FROM employees
         WHERE country = ?
     `).get(country);
+    
+    if (result.min === null) {
+        throw {
+            status: 404,
+            message: `No employees found for country: ${country}`
+        };
+    }
 
     return result;
 };
