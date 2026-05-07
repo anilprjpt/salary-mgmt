@@ -33,9 +33,19 @@ const updateEmployee = (req, res, next) => {
   }
 };
 
+const deleteEmployee = (req, res, next) => {
+  try {
+    service.deleteEmployee(req.params.id);
+    res.status(204).send();
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   createEmployee,
   getEmployees,
   getEmployee,
-  updateEmployee
+  updateEmployee,
+  deleteEmployee
 };

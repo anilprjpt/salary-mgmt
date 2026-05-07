@@ -35,9 +35,14 @@ const updateEmployee = (id, data) => {
   return repo.update(id, data);
 };
 
+const deleteEmployee = (id) => {
+  return repo.delete(id);
+};
+
 module.exports = {
   createEmployee,
   getAllEmployees,
   getEmployeeById,
-  updateEmployee
+  updateEmployee,
+  deleteEmployee
 };
