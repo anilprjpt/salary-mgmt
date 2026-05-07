@@ -22,8 +22,13 @@ const getEmployeeById = (id) => {
   return employee;
 };
 
+const updateEmployee = (id, data) => {
+  return repo.update(id, data);
+};
+
 module.exports = {
   createEmployee,
   getAllEmployees,
-  getEmployeeById
+  getEmployeeById,
+  updateEmployee
 };

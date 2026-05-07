@@ -25,8 +25,17 @@ const getEmployee = (req, res, next) => {
   }
 };
 
+const updateEmployee = (req, res, next) => {
+  try {
+    res.json(service.updateEmployee(req.params.id, req.body));
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   createEmployee,
   getEmployees,
-  getEmployee
+  getEmployee,
+  updateEmployee
 };
