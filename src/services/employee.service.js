@@ -36,6 +36,14 @@ const updateEmployee = (id, data) => {
 };
 
 const deleteEmployee = (id) => {
+  const employee = repo.findById(id);
+  if (!employee) {
+    throw {
+      status: 404,
+      message: "Employee not found"
+    };
+  }
+  
   return repo.deleteEmployee(id);
 };
 
