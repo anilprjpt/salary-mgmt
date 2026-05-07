@@ -199,4 +199,16 @@ describe("Employee API - CRUD", () => {
         expect(getRes.statusCode).toBe(404);
     });
 
+    it("should return 404 when deleting non-existent employee", async () => {
+        const res = await request(app)
+            .delete("/employees/99999");
+
+        expect(res.statusCode).toBe(404);
+
+        expect(res.body).toEqual({
+            success: false,
+            message: "Employee not found"
+        });
+    });
+
 });
