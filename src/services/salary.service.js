@@ -15,13 +15,17 @@ const calculateSalary = (country,grossSalary) => {
     };
 };
 
-exports.getSalaryByEmployeeId = (id, gross) => {    
-    if (!gross) {
+const validateGrossSalary = (gross) => {
+    if (!gross || gross === undefined || gross === null || gross === "") {
         throw {
             status: 400,
             message: "Gross salary is required"
         };
     }
+};
+
+exports.getSalaryByEmployeeId = (id, gross) => {  
+    validateGrossSalary(gross);  
     const employee = employeeRepo.findById(id);
     if (!employee) {
         throw {
