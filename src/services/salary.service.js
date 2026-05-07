@@ -60,9 +60,20 @@ const getCountryMetrics = (country) => {
     return metrics;
 };
 
+const getJobTitleAvg = (jobTitle) => {
+    const result = db.prepare(`
+        SELECT AVG(salary) as avg
+        FROM employees
+        WHERE jobTitle = ?
+    `).get(jobTitle);
+
+    return result;  
+};
+
 module.exports = {
     calculateSalary,
     validateGrossSalary,
     getSalaryByEmployeeId,
-    getCountryMetrics
+    getCountryMetrics,
+    getJobTitleAvg
 };

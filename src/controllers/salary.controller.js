@@ -18,3 +18,15 @@ exports.getCountryMetrics = (req, res, next) => {
     next(err);
   }
 };
+
+exports.getJobMetrics = (req, res, next) => {
+  try {
+    const result =
+      salaryService.getJobTitleAvg(
+        req.params.jobTitle
+      );
+    res.status(200).json(result);
+  } catch (err) {
+    next(err);
+  }
+};
