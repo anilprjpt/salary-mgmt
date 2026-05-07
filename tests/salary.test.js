@@ -26,4 +26,26 @@ describe("Salary API", () => {
         });
     });
 
+    it("should return 400 if gross salary is missing", async () => {
+        const createRes = await request(app)
+            .post("/employees")
+            .send({
+                fullName: "Emp India",
+                jobTitle: "Developer",
+                country: "India",
+                salary: 50000
+            });
+
+        const employeeId = createRes.body.id;
+
+        const res = await request(app)
+            .get(`/salary/${employeeId}`);
+
+        expect(res.statusCode).toBe(400);
+
+        expect(res.body.message).toBe(
+            "Gross salary is required"
+        );
+    });
+
 });
