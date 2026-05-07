@@ -33,12 +33,12 @@ const validateEmployee = (data) => {
   ]);
 
   // Additional checks
-  const { salary } = data;
+  const { salary, fullName } = data;
   if (typeof salary !== "number" || salary <= 0) {
     throw new Error("Salary must be a positive number");
   }
 
-  if (data.fullName.length < 2) {
+  if (fullName.length < 2) {
     throw new Error("Full name must be at least 2 characters");
   }
 };
