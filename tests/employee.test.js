@@ -129,4 +129,52 @@ describe("Employee API - CRUD", () => {
         expect(res.body.message).toContain("Employee not found");
     });
 
+    it("should update employee", async () => {
+        const createRes = await request(app)
+            .post("/employees")
+            .send({
+                fullName: "Anil Prajapati",
+                jobTitle: "Developer",
+                country: "India",
+                salary: 50000
+            });
+        const employeeId = createRes.body.id;
+
+        const res = await request(app)
+            .put(`/employees/${employeeId}`)
+            .send({
+                fullName: "Updated Name",
+                jobTitle: "Senior Developer",
+                country: "India",
+                salary: 70000
+            });
+
+        expect(res.statusCode).toBe(200);
+
+        expect(res.body).toHaveProperty(
+            "id",
+            employeeId
+        );
+
+        expect(res.body).toHaveProperty(
+            "fullName",
+            "Updated Name"
+        );
+
+        expect(res.body).toHaveProperty(
+            "jobTitle",
+            "Senior Developer"
+        );
+
+        expect(res.body).toHaveProperty(
+            "country",
+            "India"
+        );
+
+        expect(res.body).toHaveProperty(
+            "salary",
+            70000
+        );
+    });
+
 });
