@@ -12,7 +12,8 @@ exports.getSalary = (req, res, next) => {
 
 exports.getCountryMetrics = (req, res, next) => {
   try {
-    res.json(salaryService.getCountryMetrics(req.params.country));
+    const { country } = req.params;
+    res.json(salaryService.getCountryMetrics(country));
   } catch (err) {
     next(err);
   }
