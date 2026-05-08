@@ -24,8 +24,9 @@ const validateGrossSalary = (gross) => {
             message: "Gross salary is required"
         };
     }
-    
-    if (isNaN(Number(gross))) {
+
+    const salary = Number(gross);
+    if (Number.isNaN(salary)) {
         throw {
             status: 400,
             message: "Gross salary must be a number"
