@@ -24,6 +24,20 @@ const validateGrossSalary = (gross) => {
             message: "Gross salary is required"
         };
     }
+    
+    if (isNaN(Number(gross))) {
+        throw {
+            status: 400,
+            message: "Gross salary must be a number"
+        };
+    }
+
+    if (Number(gross) <= 0) {
+        throw {
+            status: 400,
+            message: "Gross salary must be greater than 0"
+        };
+    }
 };
 
 const getSalaryByEmployeeId = (id, gross) => {  
