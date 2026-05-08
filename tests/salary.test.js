@@ -1,5 +1,10 @@
 const request = require("supertest");
 const app = require("../src/app");
+const db = require("../src/config/database");
+
+beforeEach(() => {
+    db.prepare("DELETE FROM employees").run();
+});
 
 describe("Salary API", () => {
     it("should calculate salary for India using custom gross salary", async () => {
@@ -24,7 +29,7 @@ describe("Salary API", () => {
             deduction: 5000,
             net: 45000
         });
-    });
+    });    
 
     it("should return 400 if gross salary is missing", async () => {
         const createRes = await request(app)
@@ -100,7 +105,7 @@ describe("GET /salary/metrics/country/:country", () => {
 
         expect(res.body.min).toBe(30000);
         expect(res.body.max).toBe(50000);
-        expect(res.body.avg).toBe(45000);
+        expect(res.body.avg).toBe(40000);
     });
 
     it("should return 404 when no employees exist for country", async () => {
@@ -137,7 +142,7 @@ describe("GET /salary/metrics/job/:jobTitle", () => {
 
         expect(res.statusCode).toBe(200);
         expect(res.body).toEqual({
-            avg: 42000
+            avg: 60000
         });
     });
 

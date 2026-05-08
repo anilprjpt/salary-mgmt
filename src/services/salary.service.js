@@ -18,7 +18,7 @@ const calculateSalary = (country,grossSalary) => {
 };
 
 const validateGrossSalary = (gross) => {
-    if (!gross || gross === undefined || gross === null || gross === "") {
+    if (gross === undefined || gross === null || gross === "") {
         throw {
             status: 400,
             message: "Gross salary is required"
@@ -36,7 +36,7 @@ const getSalaryByEmployeeId = (id, gross) => {
         };
     }
 
-    return calculateSalary(employee.country, gross);
+    return calculateSalary(employee.country, Number(gross));
 };
 
 const getCountryMetrics = (country) => {
