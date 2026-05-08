@@ -76,6 +76,28 @@ describe("Salary API", () => {
             net: 1760
         });
     });
+
+    it("should return 400 if gross salary is 0 or less then 0", async () => {
+        const createRes = await request(app)
+            .post("/employees")
+            .send({
+                fullName: "Emp India",
+                jobTitle: "Developer",
+                country: "India",
+                salary: 50000
+            });
+
+        const employeeId = createRes.body.id;
+
+        const res = await request(app)
+            .get(`/salary/${employeeId}?gross=0`);
+
+        expect(res.statusCode).toBe(400);
+
+        expect(res.body.message).toBe(
+            "Gross salary must be greater than 0"
+        );
+    });
 });
 
 describe("GET /salary/metrics/country/:country", () => {
